@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2BF6B3CDFE8BE920AB0BCFE /* libPods-Weather Mappy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31EA66BC557ACA3D2C4CFFA3 /* libPods-Weather Mappy.a */; };
 		FF37CC8E22F6F5E9006971A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CC8D22F6F5E9006971A2 /* AppDelegate.swift */; };
 		FF37CC9022F6F5E9006971A2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CC8F22F6F5E9006971A2 /* ViewController.swift */; };
 		FF37CC9322F6F5E9006971A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF37CC9122F6F5E9006971A2 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31EA66BC557ACA3D2C4CFFA3 /* libPods-Weather Mappy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weather Mappy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F6CB639302A604EA9380A8B /* Pods-Weather Mappy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather Mappy.release.xcconfig"; path = "Target Support Files/Pods-Weather Mappy/Pods-Weather Mappy.release.xcconfig"; sourceTree = "<group>"; };
+		A422B923363D178D3305159C /* Pods-Weather Mappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather Mappy.debug.xcconfig"; path = "Target Support Files/Pods-Weather Mappy/Pods-Weather Mappy.debug.xcconfig"; sourceTree = "<group>"; };
 		FF37CC8A22F6F5E9006971A2 /* Weather Mappy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weather Mappy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF37CC8D22F6F5E9006971A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FF37CC8F22F6F5E9006971A2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2BF6B3CDFE8BE920AB0BCFE /* libPods-Weather Mappy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3983980836B71FFB3F85AA91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31EA66BC557ACA3D2C4CFFA3 /* libPods-Weather Mappy.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EABB7DB8FE80E4696D7E14D3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A422B923363D178D3305159C /* Pods-Weather Mappy.debug.xcconfig */,
+				5F6CB639302A604EA9380A8B /* Pods-Weather Mappy.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FF37CC8122F6F5E9006971A2 = {
 			isa = PBXGroup;
 			children = (
 				FF37CC8C22F6F5E9006971A2 /* Weather Mappy */,
 				FF37CC8B22F6F5E9006971A2 /* Products */,
+				EABB7DB8FE80E4696D7E14D3 /* Pods */,
+				3983980836B71FFB3F85AA91 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +96,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FF37CC9C22F6F5EC006971A2 /* Build configuration list for PBXNativeTarget "Weather Mappy" */;
 			buildPhases = (
+				25D1A4A10CBAD88ABBE68E96 /* [CP] Check Pods Manifest.lock */,
 				FF37CC8622F6F5E9006971A2 /* Sources */,
 				FF37CC8722F6F5E9006971A2 /* Frameworks */,
 				FF37CC8822F6F5E9006971A2 /* Resources */,
+				D04AD99E91976D69D6C1BF1E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		25D1A4A10CBAD88ABBE68E96 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Weather Mappy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D04AD99E91976D69D6C1BF1E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Weather Mappy/Pods-Weather Mappy-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Weather Mappy/Pods-Weather Mappy-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Weather Mappy/Pods-Weather Mappy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FF37CC8622F6F5E9006971A2 /* Sources */ = {
@@ -280,6 +349,7 @@
 		};
 		FF37CC9D22F6F5EC006971A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A422B923363D178D3305159C /* Pods-Weather Mappy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +368,7 @@
 		};
 		FF37CC9E22F6F5EC006971A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F6CB639302A604EA9380A8B /* Pods-Weather Mappy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
