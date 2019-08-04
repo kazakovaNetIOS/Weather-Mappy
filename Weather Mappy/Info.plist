@@ -41,5 +41,14 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    <key>NSLocationUsageDescription</key>
+    <string>We need your location to obtain your current weather conditions</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location to obtain your current weather conditions</string>
 </dict>
 </plist>

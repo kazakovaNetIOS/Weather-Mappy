@@ -7,4 +7,6 @@ target 'Weather Mappy' do
 
   # Pods for Weather Mappy
   pod 'GoogleMaps'
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
 end

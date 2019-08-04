@@ -7,14 +7,127 @@
 //
 
 import UIKit
+import GoogleMaps
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
-
+    
+    let WEATHER_URL = "https://api.openweathermap.org/data/2.5/find"
+    let APP_ID = "9aea5e4452f904a6271af83832c7ac23"
+    
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    let locationManager = CLLocationManager()
+    var weatherDataModel = WeatherDataModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
     }
-
-
+    
+    //MARK: - Networking
+    /***************************************************************/
+    
+    func getWeatherData(url: String, parameters: [String : String]) {
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            if response.result.isSuccess {
+                print("Success! Get the weather data")
+                
+                let weatherJSON: JSON = JSON(response.result.value!)
+                
+                self.updateWeatherData(json: weatherJSON)
+            } else {
+                print("Error \(String(describing: response.result.error))")
+                
+                //                self.cityLabel.text = "Connection Issues"
+            }
+        }
+    }
+    
+    //MARK: - JSON Parsing
+    /***************************************************************/
+    
+    func updateWeatherData(json: JSON) {
+        let list = json["list"]
+        for point in list {
+            
+            if let tempResult = point.1["main"]["temp"].double,
+                let lat = point.1["coord"]["lat"].double,
+                let lon = point.1["coord"]["lon"].double{
+                weatherDataModel = WeatherDataModel()
+                weatherDataModel.latitude = lat
+                weatherDataModel.longtitude = lon
+                weatherDataModel.temperature = Int(tempResult - 273.15)
+                weatherDataModel.city = point.1["name"].stringValue
+                weatherDataModel.condition = point.1["weather"][0]["id"].intValue
+                weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
+                
+                updateUIWithWeatherData()
+            } else {
+                //            cityLabel.text = "Weather Unavailable"
+            }
+            
+            print(point)
+        }
+    }
+    
+    //MARK: - UI Updates
+    /***************************************************************/
+    
+    func updateUIWithWeatherData() {
+        let marker = GMSMarker()
+        let markerImage = UIImage(named: weatherDataModel.weatherIconName)
+        let markerView = UIImageView(image: markerImage)
+        marker.position = CLLocationCoordinate2D(latitude: weatherDataModel.latitude, longitude: weatherDataModel.longtitude)
+        marker.iconView = markerView
+        marker.title = String(weatherDataModel.temperature)
+        marker.snippet = weatherDataModel.city
+        marker.map = mapView
+    }
 }
 
+extension ViewController: CLLocationManagerDelegate {
+    
+    //MARK: - Location Manager Delegate Methods
+    /***************************************************************/
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+            
+            mapView.isMyLocationEnabled = true
+            mapView.settings.myLocationButton = true
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        mapView.camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 12.0)
+        
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        
+        let params: [String : String] = [
+            "lat": String(latitude),
+            "lon": String(longitude),
+            "cnt": "10",
+            "lang": "ru",
+            "appid": APP_ID]
+        
+        getWeatherData(url: WEATHER_URL, parameters: params)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        //        cityLabel.text = "Location Unavailable"
+    }
+}
