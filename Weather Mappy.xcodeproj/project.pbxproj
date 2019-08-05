@@ -87,10 +87,10 @@
 				FF37CC8D22F6F5E9006971A2 /* AppDelegate.swift */,
 				FF37CC8F22F6F5E9006971A2 /* ViewController.swift */,
 				FF37CCA522F76799006971A2 /* Marker view */,
+				FF37CCA822F829C7006971A2 /* Model */,
 				FF37CCA922F82A08006971A2 /* Story board */,
 				FF37CC9422F6F5EC006971A2 /* Assets.xcassets */,
 				FF37CC9922F6F5EC006971A2 /* Info.plist */,
-				FF37CCA822F829C7006971A2 /* Model */,
 			);
 			path = "Weather Mappy";
 			sourceTree = "<group>";

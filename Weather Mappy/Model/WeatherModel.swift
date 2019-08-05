@@ -8,14 +8,15 @@
 
 import Foundation
 
-class WeatherModel {
-    
-    var temperature: Int = 0
-    var iconName: String = ""
-    var latitude: Double = 0.0
-    var longtitude: Double = 0.0
-    
-    func getIcon(condition: Int) -> String {
+struct WeatherModel {
+    let temperature: Int
+    let latitude: Double
+    let longtitude: Double
+    let condition: Int    
+}
+
+extension WeatherModel {
+    func getIcon() -> String {
         switch (condition) {
         case 0...300 :
             return "tstorm1"

@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     
     private let locationManager = CLLocationManager()
-    private var weatherModel = WeatherModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,24 +61,21 @@ class ViewController: UIViewController {
         }
         
         for point in list {
-            weatherModel = WeatherModel()
+            let weatherModel = WeatherModel(temperature: Int(point.1["main"]["temp"].double! - 273.15),
+                                            latitude: point.1["coord"]["lat"].double!,
+                                            longtitude: point.1["coord"]["lon"].double!,
+                                            condition: point.1["weather"][0]["id"].intValue)
             
-            weatherModel.latitude = point.1["coord"]["lat"].double!
-            weatherModel.longtitude = point.1["coord"]["lon"].double!
-            weatherModel.temperature = Int(point.1["main"]["temp"].double! - 273.15)
-            weatherModel.iconName =
-                weatherModel.getIcon(condition: point.1["weather"][0]["id"].intValue)
-            
-            updateUIWithWeatherData()
+            updateUIWithWeatherData(with: weatherModel)
         }
     }
     
     //MARK: - UI Updates
     /***************************************************************/
     
-    func updateUIWithWeatherData() {
+    func updateUIWithWeatherData(with weatherModel: WeatherModel) {
         let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 70),
-                                    picture: weatherModel.iconName,
+                                    picture: weatherModel.getIcon(),
                                     temperature: String(weatherModel.temperature))
         
         let marker = GMSMarker()
