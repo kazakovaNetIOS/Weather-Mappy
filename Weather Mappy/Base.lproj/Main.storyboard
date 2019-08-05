@@ -22,18 +22,32 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efS-S2-s76">
+                                <rect key="frame" x="0.0" y="822" width="414" height="40"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="woy-Bh-wRo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oUF-FS-C2l" secondAttribute="trailing" id="Fcd-mq-Ihx"/>
                             <constraint firstItem="oUF-FS-C2l" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MjG-wn-IZP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="efS-S2-s76" secondAttribute="trailing" id="TCD-OX-I9l"/>
                             <constraint firstItem="oUF-FS-C2l" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XE4-h5-sNo"/>
+                            <constraint firstItem="efS-S2-s76" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="s3e-iA-fdh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oUF-FS-C2l" secondAttribute="bottom" id="s6W-2a-JXi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="efS-S2-s76" secondAttribute="bottom" id="szp-nk-93R"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="oUF-FS-C2l" id="n3o-hp-lQ9"/>
+                        <outlet property="warningLabel" destination="efS-S2-s76" id="3b5-JB-QOT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

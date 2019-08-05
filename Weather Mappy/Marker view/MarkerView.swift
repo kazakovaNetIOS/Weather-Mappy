@@ -13,12 +13,14 @@ class MarkerView: UIView {
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
     
-    private var weatherData: WeatherDataModel!
+    private var pictureImageName: String = "dunno"
+    private var temperatureValue: String = "-"
     
-    convenience init(frame: CGRect, data: WeatherDataModel) {
+    convenience init(frame: CGRect, picture: String, temperature: String) {
         self.init(frame: frame)
         
-        self.weatherData = data
+        self.pictureImageName = picture
+        self.temperatureValue = temperature
         
         setupViews()
     }
@@ -29,8 +31,8 @@ class MarkerView: UIView {
         xibView.frame = self.bounds
         xibView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        pictureImageView.image = UIImage(named: weatherData.weatherIconName)
-        temperatureLabel.text = "\(weatherData.temperature) °C"
+        pictureImageView.image = UIImage(named: pictureImageName)
+        temperatureLabel.text = "\(temperatureValue) °C"
         
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.withAlphaComponent(0.6).cgColor

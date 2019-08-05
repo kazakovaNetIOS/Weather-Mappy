@@ -17,9 +17,10 @@ class ViewController: UIViewController {
     let APP_ID = "9aea5e4452f904a6271af83832c7ac23"
     
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var warningLabel: UILabel!
     
-    let locationManager = CLLocationManager()
-    var weatherDataModel = WeatherDataModel()
+    private let locationManager = CLLocationManager()
+    private var weatherDataModel = WeatherDataModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,8 @@ class ViewController: UIViewController {
             } else {
                 print("Error \(String(describing: response.result.error))")
                 
-                //                self.cityLabel.text = "Connection Issues"
+                self.warningLabel.text = "Connection Issues"
+                self.warningLabel.isHidden = false
             }
         }
     }
@@ -68,7 +70,8 @@ class ViewController: UIViewController {
                 
                 updateUIWithWeatherData()
             } else {
-                //            cityLabel.text = "Weather Unavailable"
+                warningLabel.text = "Weather Unavailable"
+                warningLabel.isHidden = false
             }
         }
     }
@@ -77,7 +80,9 @@ class ViewController: UIViewController {
     /***************************************************************/
     
     func updateUIWithWeatherData() {
-        let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 70), data: weatherDataModel)
+        let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 70),
+                                    picture: weatherDataModel.weatherIconName,
+                                    temperature: String(weatherDataModel.temperature))
         let markerImage = markerView.asImage()
         
         let marker = GMSMarker()
@@ -86,6 +91,8 @@ class ViewController: UIViewController {
         marker.icon = markerImage
         marker.opacity = 0.7
         marker.map = mapView
+        
+        warningLabel.isHidden = true
     }
 }
 
@@ -117,7 +124,7 @@ extension ViewController: CLLocationManagerDelegate {
         let params: [String : String] = [
             "lat": String(latitude),
             "lon": String(longitude),
-            "cnt": "10",
+            "cnt": "2",
             "lang": "ru",
             "appid": APP_ID]
         
