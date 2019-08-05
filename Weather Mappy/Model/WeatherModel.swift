@@ -1,5 +1,5 @@
 //
-//  WeatherDataModel.swift
+//  WeatherModel.swift
 //  Weather Mappy
 //
 //  Created by Natalia Kazakova on 04/08/2019.
@@ -8,17 +8,14 @@
 
 import Foundation
 
-class WeatherDataModel {
+class WeatherModel {
     
     var temperature: Int = 0
-    var condition: Int = 0
-    var city: String = ""
-    var weatherIconName: String = ""
+    var iconName: String = ""
     var latitude: Double = 0.0
     var longtitude: Double = 0.0
     
-    //This method turns a condition code into the name of the weather condition image
-    func updateWeatherIcon(condition: Int) -> String {
+    func getIcon(condition: Int) -> String {
         switch (condition) {
         case 0...300 :
             return "tstorm1"
