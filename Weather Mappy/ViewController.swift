@@ -53,8 +53,7 @@ class ViewController: UIViewController {
     /***************************************************************/
     
     func updateWeatherData(json: JSON) {
-        let list = json["list"]
-        for point in list {
+        for point in json["list"] {
             
             if let tempResult = point.1["main"]["temp"].double,
                 let lat = point.1["coord"]["lat"].double,
@@ -71,8 +70,6 @@ class ViewController: UIViewController {
             } else {
                 //            cityLabel.text = "Weather Unavailable"
             }
-            
-            print(point)
         }
     }
     
@@ -80,13 +77,14 @@ class ViewController: UIViewController {
     /***************************************************************/
     
     func updateUIWithWeatherData() {
+        let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 70), data: weatherDataModel)
+        let markerImage = markerView.asImage()
+        
         let marker = GMSMarker()
-        let markerImage = UIImage(named: weatherDataModel.weatherIconName)
-        let markerView = UIImageView(image: markerImage)
-        marker.position = CLLocationCoordinate2D(latitude: weatherDataModel.latitude, longitude: weatherDataModel.longtitude)
-        marker.iconView = markerView
-        marker.title = String(weatherDataModel.temperature)
-        marker.snippet = weatherDataModel.city
+        marker.position = CLLocationCoordinate2D(latitude: weatherDataModel.latitude,
+                                                 longitude: weatherDataModel.longtitude)
+        marker.icon = markerImage
+        marker.opacity = 0.7
         marker.map = mapView
     }
 }

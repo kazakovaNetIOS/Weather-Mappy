@@ -14,6 +14,8 @@
 		FF37CC9522F6F5EC006971A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF37CC9422F6F5EC006971A2 /* Assets.xcassets */; };
 		FF37CC9822F6F5EC006971A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF37CC9622F6F5EC006971A2 /* LaunchScreen.storyboard */; };
 		FF37CCA022F71AF6006971A2 /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CC9F22F71AF6006971A2 /* WeatherDataModel.swift */; };
+		FF37CCA222F76570006971A2 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CCA122F76570006971A2 /* MarkerView.swift */; };
+		FF37CCA422F765C4006971A2 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF37CCA322F765C4006971A2 /* MarkerView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		FF37CC9722F6F5EC006971A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF37CC9922F6F5EC006971A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF37CC9F22F71AF6006971A2 /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
+		FF37CCA122F76570006971A2 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
+		FF37CCA322F765C4006971A2 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 			children = (
 				FF37CC8D22F6F5E9006971A2 /* AppDelegate.swift */,
 				FF37CC8F22F6F5E9006971A2 /* ViewController.swift */,
+				FF37CCA522F76799006971A2 /* Marker view */,
 				FF37CC9122F6F5E9006971A2 /* Main.storyboard */,
 				FF37CC9422F6F5EC006971A2 /* Assets.xcassets */,
 				FF37CC9622F6F5EC006971A2 /* LaunchScreen.storyboard */,
@@ -89,6 +94,15 @@
 				FF37CC9F22F71AF6006971A2 /* WeatherDataModel.swift */,
 			);
 			path = "Weather Mappy";
+			sourceTree = "<group>";
+		};
+		FF37CCA522F76799006971A2 /* Marker view */ = {
+			isa = PBXGroup;
+			children = (
+				FF37CCA122F76570006971A2 /* MarkerView.swift */,
+				FF37CCA322F765C4006971A2 /* MarkerView.xib */,
+			);
+			path = "Marker view";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF37CCA422F765C4006971A2 /* MarkerView.xib in Resources */,
 				FF37CC9822F6F5EC006971A2 /* LaunchScreen.storyboard in Resources */,
 				FF37CC9522F6F5EC006971A2 /* Assets.xcassets in Resources */,
 				FF37CC9322F6F5E9006971A2 /* Main.storyboard in Resources */,
@@ -206,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF37CCA222F76570006971A2 /* MarkerView.swift in Sources */,
 				FF37CC9022F6F5E9006971A2 /* ViewController.swift in Sources */,
 				FF37CC8E22F6F5E9006971A2 /* AppDelegate.swift in Sources */,
 				FF37CCA022F71AF6006971A2 /* WeatherDataModel.swift in Sources */,
