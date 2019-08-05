@@ -13,7 +13,7 @@
 		FF37CC9322F6F5E9006971A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF37CC9122F6F5E9006971A2 /* Main.storyboard */; };
 		FF37CC9522F6F5EC006971A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF37CC9422F6F5EC006971A2 /* Assets.xcassets */; };
 		FF37CC9822F6F5EC006971A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF37CC9622F6F5EC006971A2 /* LaunchScreen.storyboard */; };
-		FF37CCA022F71AF6006971A2 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CC9F22F71AF6006971A2 /* WeatherModel.swift */; };
+		FF37CCA022F71AF6006971A2 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CC9F22F71AF6006971A2 /* WeatherData.swift */; };
 		FF37CCA222F76570006971A2 /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF37CCA122F76570006971A2 /* MarkerView.swift */; };
 		FF37CCA422F765C4006971A2 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF37CCA322F765C4006971A2 /* MarkerView.xib */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		FF37CC9422F6F5EC006971A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF37CC9722F6F5EC006971A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF37CC9922F6F5EC006971A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FF37CC9F22F71AF6006971A2 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		FF37CC9F22F71AF6006971A2 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		FF37CCA122F76570006971A2 /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		FF37CCA322F765C4006971A2 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,7 +107,7 @@
 		FF37CCA822F829C7006971A2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FF37CC9F22F71AF6006971A2 /* WeatherModel.swift */,
+				FF37CC9F22F71AF6006971A2 /* WeatherData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,7 +240,7 @@
 				FF37CCA222F76570006971A2 /* MarkerView.swift in Sources */,
 				FF37CC9022F6F5E9006971A2 /* ViewController.swift in Sources */,
 				FF37CC8E22F6F5E9006971A2 /* AppDelegate.swift in Sources */,
-				FF37CCA022F71AF6006971A2 /* WeatherModel.swift in Sources */,
+				FF37CCA022F71AF6006971A2 /* WeatherData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,14 +8,18 @@
 
 import Foundation
 
-struct WeatherModel {
+struct WeatherData {
     let temperature: Int
     let latitude: Double
     let longtitude: Double
+    let city: String
     let condition: Int    
 }
 
-extension WeatherModel {
+//MARK: - Get icon for condition
+/***************************************************************/
+
+extension WeatherData {
     func getIcon() -> String {
         switch (condition) {
         case 0...300 :

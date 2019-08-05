@@ -48,6 +48,9 @@ class MarkerView: UIView {
     }
 }
 
+//MARK: - Convert to UIImage
+/***************************************************************/
+
 extension MarkerView {
     func asImage() -> UIImage {        
         let renderer = UIGraphicsImageRenderer(size: bounds.size)

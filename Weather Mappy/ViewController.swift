@@ -13,83 +13,107 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
-    let WEATHER_URL = "https://api.openweathermap.org/data/2.5/find"
-    let APP_ID = "9aea5e4452f904a6271af83832c7ac23"
-    let CITY_COUNT = "10"
-    
-    @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var warningLabel: UILabel!
+    private let WEATHER_URL = "https://api.openweathermap.org/data/2.5/find"
+    private let APP_ID = "9aea5e4452f904a6271af83832c7ac23"
+    private let CITY_COUNT = "10"
     
     private let locationManager = CLLocationManager()
     
+    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var warningLabel: UILabel!
+}
+
+//MARK: - Override methods
+/***************************************************************/
+
+extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestWhenInUseAuthorization()
+        setupLocationManager()
     }
-    
-    //MARK: - Networking
-    /***************************************************************/
-    
-    func getWeatherData(url: String, parameters: [String : String]) {
+}
+
+//MARK: - Networking
+/***************************************************************/
+
+extension ViewController {
+    private func getWeatherData(url: String, parameters: [String : String]) {
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 let weatherJSON: JSON = JSON(response.result.value!)
                 
                 self.updateWeatherData(json: weatherJSON)
             } else {
-                print("Error \(String(describing: response.result.error))")
+                print("Error \(String(describing: response.result.error?.localizedDescription))")
                 
-                self.warningLabel.text = "Connection Issues"
-                self.warningLabel.isHidden = false
+                self.showError(msg: "Connection Issues")
             }
         }
     }
+}
+
+//MARK: - UI Updates
+/***************************************************************/
+
+extension ViewController {
+    private func updateUI(with data: WeatherData) {
+        let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 70),
+                                    picture: data.getIcon(),
+                                    temperature: String(data.temperature))
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: data.latitude,
+                                                 longitude: data.longtitude)
+        marker.icon = markerView.asImage()
+        marker.opacity = 0.7
+        marker.title = data.city
+        marker.map = mapView
+        
+        hideError()
+    }
     
-    //MARK: - JSON Parsing
-    /***************************************************************/
+    private func showError(msg: String) {
+        self.warningLabel.text = msg
+        self.warningLabel.isHidden = false
+    }
     
-    func updateWeatherData(json: JSON) {
+    private func hideError() {
+        self.warningLabel.isHidden = true
+    }
+    
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+    }
+}
+
+//MARK: - JSON Parsing
+/***************************************************************/
+
+extension ViewController {
+    private func updateWeatherData(json: JSON) {
         let list = json["list"]
         
         guard list.count > 0 else {
-            warningLabel.text = "Weather Unavailable"
-            warningLabel.isHidden = false
+            showError(msg: "Weather Unavailable")
             return
         }
         
         for point in list {
-            let weatherModel = WeatherModel(temperature: Int(point.1["main"]["temp"].double! - 273.15),
-                                            latitude: point.1["coord"]["lat"].double!,
-                                            longtitude: point.1["coord"]["lon"].double!,
-                                            condition: point.1["weather"][0]["id"].intValue)
+            let weatherData = WeatherData(temperature: Int(point.1["main"]["temp"].double! - 273.15),
+                                          latitude: point.1["coord"]["lat"].double!,
+                                          longtitude: point.1["coord"]["lon"].double!,
+                                          city: point.1["name"].stringValue,
+                                          condition: point.1["weather"][0]["id"].intValue)
             
-            updateUIWithWeatherData(with: weatherModel)
+            updateUI(with: weatherData)
         }
-    }
-    
-    //MARK: - UI Updates
-    /***************************************************************/
-    
-    func updateUIWithWeatherData(with weatherModel: WeatherModel) {
-        let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 70),
-                                    picture: weatherModel.getIcon(),
-                                    temperature: String(weatherModel.temperature))
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: weatherModel.latitude,
-                                                 longitude: weatherModel.longtitude)
-        marker.icon = markerView.asImage()
-        marker.opacity = 0.7
-        marker.map = mapView
-        
-        warningLabel.isHidden = true
     }
 }
 
-//MARK: - Location Manager Delegate Methods
+//MARK: - CLLocationManagerDelegate
 /***************************************************************/
 
 extension ViewController: CLLocationManagerDelegate {
@@ -108,7 +132,9 @@ extension ViewController: CLLocationManagerDelegate {
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
         
-        mapView.camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 12.0)
+        mapView.camera = GMSCameraPosition.camera(withLatitude: latitude,
+                                                  longitude: longitude,
+                                                  zoom: 12.0)
         
         locationManager.stopUpdatingLocation()
         
@@ -121,12 +147,11 @@ extension ViewController: CLLocationManagerDelegate {
         
         getWeatherData(url: WEATHER_URL, parameters: params)
         
-        warningLabel.isHidden = true
+        hideError()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-        warningLabel.text = "Location Unavailable"
-        warningLabel.isHidden = false
+        print("Error \(error.localizedDescription)")
+        showError(msg: "Location Unavailable")
     }
 }
